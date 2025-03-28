@@ -5,17 +5,21 @@ var wallets = new List<Wallet>
 {
     new Wallet
     {
+        Id = 0,
         Owner = "User1",
         CurrentValue = 100.00M,
         LastUpdate = DateTime.UtcNow
     },
     new Wallet
     {
+        Id = 1,
         Owner = "User2",
         CurrentValue = 50.00M,
         LastUpdate = DateTime.UtcNow
     }
 };
+
+var transactionHistory = new List<Transaction>();
 
 app.MapPost("/addValue", async (Wallet wallet, decimal amount) =>
 {
@@ -27,13 +31,16 @@ app.MapPost("/addValue", async (Wallet wallet, decimal amount) =>
     // Update wallet balance
     wallet.CurrentValue += amount;
 
-    // Record the transaction
-    wallet.LastTransactions.Add(new Transaction
+    var current = new Transaction
     {
         Timestamp = DateTime.UtcNow,
         Type = "Refill",
         Amount = amount
-    });
+    };
+
+    // Record the transaction
+    wallet.LastTransactions.Add(current);
+    transactionHistory.Add(current);
 
     // Update the lastUpdate field
     wallet.LastUpdate = DateTime.UtcNow;
@@ -55,13 +62,15 @@ app.MapPost("/subtractValue", async (Wallet wallet, decimal amount) =>
         // Update wallet balance
         wallet.CurrentValue -= amount;
 
-        // Record the transaction
-        wallet.LastTransactions.Add(new Transaction
+        var current = new Transaction
         {
             Timestamp = DateTime.UtcNow,
             Type = "Payment",
             Amount = amount
-        });
+        };
+        // Record the transaction
+        wallet.LastTransactions.Add(current);
+        transactionHistory.Add(current);
 
         // Update the lastUpdate field
         wallet.LastUpdate = DateTime.UtcNow;
