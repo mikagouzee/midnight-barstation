@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Pull the latest code from GitHub
-                git branch: 'main', url: 'https://github.com/mikagouzee/midnight-barstation'
+                git branch: 'main', url: 'https://github.com/mikagouzee/Barstation-Barstation'
             }
         }
 
@@ -19,7 +19,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build the Docker image for the app
-                sh 'docker build -t mikagouzee/midnight-barstation:latest .'
+                sh 'docker build -t mikagouzee/Barstation-Barstation:latest .'
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
                 // Log in to DockerHub (ensure credentials are configured in Jenkins)
                 withDockerRegistry([credentialsId: 'dockerhub-credentials', url: '']) {
                     // Push the Docker image
-                    sh 'docker push docmika10/midnight-barstation:latest'
+                    sh 'docker push docmika10/Barstation-Barstation:latest'
                 }
             }
         }
