@@ -69,5 +69,5 @@ jobs:
     # Step 3: Build and Push Docker Image
     - name: Build and Push Docker Image
       run: |
-        docker build -t docdocmika10/barstation:latest -f barstation/Dockerfile .
-        docker push docmika10/barstation:latest
+        docker build -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f barstation/Dockerfile .
+        docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
