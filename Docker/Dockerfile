@@ -7,8 +7,8 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim-arm32v7 AS build
 WORKDIR /src
 RUN echo "$PWD"
 RUN echo "ls -l"
-COPY ["./Barstation/Barstation.csproj", "./"]
-RUN dotnet restore "Barstation.csproj" --verbosity detailed
+COPY ["..\Barstation\Barstation.csproj", "./"]
+RUN dotnet restore "./Barstation.csproj" --verbosity detailed
 COPY . .
 RUN dotnet publish -c Release -o /app
 
