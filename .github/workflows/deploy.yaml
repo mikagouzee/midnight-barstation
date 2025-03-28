@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 0: init CodeQl
+    - name: Init CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: csharp
+
     # Step 1: Checkout Code
     - name: Checkout Code
       uses: actions/checkout@v3
@@ -36,10 +42,6 @@ jobs:
       run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
 
     # Step 6: Quality Assessment (Example: CodeQL or SonarQube)
-    - name: Run CodeQL Analysis
-      uses: github/codeql-action/init@v2
-      with:
-        languages: 'csharp'
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
