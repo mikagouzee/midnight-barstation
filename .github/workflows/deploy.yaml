@@ -66,9 +66,20 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Step 3: Build and Push Docker Image
+    - name: Check runner architecture
+      run: uname -m
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    
     - name: Build and Push Docker Image
       run: |
-        pwd
-        docker build --no-cache -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
-        docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
+        docker buildx create --use --name arm-builder
+        docker buildx build --platform linux/arm/v7 -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
+
+    # # Step 3: Build and Push Docker Image
+    # - name: Build and Push Docker Image
+    #   run: |
+    #     docker buildx create --use --name arm-builder
+    #     docker buildx build --no-cache -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
+    #     docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
