@@ -5,7 +5,7 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy-arm32v7 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Barstation/Barstation.csproj", "Barstation/"]
+COPY ["barstation/Barstation.csproj", "Barstation/"]
 RUN dotnet restore "Barstation/Barstation.csproj"
 COPY . .
 WORKDIR "/src/Barstation"

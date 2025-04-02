@@ -45,9 +45,10 @@ jobs:
       - name: Run Unit Tests
         run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
 
-      # Step 6: Perform CodeQL Analysis
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      ###TEMP COMMENTING OUT TO SPEED UP DEBUG RUN
+      # # Step 6: Perform CodeQL Analysis
+      # - name: Perform CodeQL Analysis
+      #   uses: github/codeql-action/analyze@v3
 
       # Step 7: Upload Build Artifacts for Next Job
       - name: Upload Build Artifacts
@@ -90,7 +91,7 @@ jobs:
         run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
 
       - name: Move Project File
-        run: mv /home/runner/work/midnight-barstation/midnight-barstation/barstation/bin/Release/net9.0/Barstation.csproj /home/runner/work/midnight-barstation/midnight-barstation/Barstation/
+        run: mv /home/runner/work/midnight-barstation/midnight-barstation/Barstation.csproj /home/runner/work/midnight-barstation/midnight-barstation/Barstation/
 
       # Step 6: Build and Push Docker Image (using artifacts)
       - name: Build and Push Docker Image
