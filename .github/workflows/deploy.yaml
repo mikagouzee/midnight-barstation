@@ -90,5 +90,5 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker buildx create --use --name arm-builder
-          docker buildx build --platform linux/arm/v7 -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
+          docker buildx build --no-cache --platform linux/arm/v7 -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
           docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
