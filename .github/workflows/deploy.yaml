@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compiled-app
-          path: /home/runner/work/midnight-barstation/midnight-barstation/barstation/bin/Release/net9.0/
+          path: /home/runner/work/midnight-barstation/midnight-barstation/Barstation/bin/Release/net9.0/
 
   push-docker:
     needs: build-and-test
@@ -85,7 +85,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: compiled-app
-          path: /home/runner/work/midnight-barstation/midnight-barstation/barstation/bin/Release/net9.0/  # Ensure path matches previous upload
+          path: /home/runner/work/midnight-barstation/midnight-barstation/Barstation/bin/Release/net9.0/  # Ensure path matches previous upload
 
       - name: Debug Artifact Path
         run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
