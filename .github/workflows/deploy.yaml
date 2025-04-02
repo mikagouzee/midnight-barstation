@@ -17,16 +17,22 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      # Step 0: Init CodeQL
-      - name: Init CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: csharp
+      ###temp comment out to speed up debug
+      # # Step 0: Init CodeQL
+      # - name: Init CodeQL
+      #   uses: github/codeql-action/init@v3
+      #   with:
+      #     languages: csharp
 
       # Step 1: Checkout Code
       
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          path: 'Barstation'
+
+      - name: Debug workspace
+        run: ls -R $GITHUB_WORKSPACE
 
       # Step 2: Setup .NET
       - name: Setup .NET
@@ -35,7 +41,7 @@ jobs:
           dotnet-version: 9.x
 
       - name: Debug Artifact Path
-        run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
+        run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/ 
 
       # Step 3: Restore Dependencies
       - name: Restore Dependencies
