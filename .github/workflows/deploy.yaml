@@ -24,8 +24,7 @@ jobs:
       #   with:
       #     languages: csharp
 
-      # Step 1: Checkout Code
-      
+      # Step 1: Checkout Code      
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -43,7 +42,7 @@ jobs:
 
       # Step 3: Restore Dependencies
       - name: Restore Dependencies
-        run: dotnet restore midnight.sln
+        run: dotnet restore $GITHUB_WORKSPACE/Barstation/Barstation.csproj
 
       # Step 4: Build Solution
       - name: Build Solution
