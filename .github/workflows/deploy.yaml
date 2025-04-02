@@ -28,8 +28,6 @@ jobs:
       
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          path: 'Barstation'
 
       - name: Debug workspace
         run: ls -R $GITHUB_WORKSPACE
@@ -41,7 +39,7 @@ jobs:
           dotnet-version: 9.x
 
       - name: Debug Artifact Path
-        run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/ 
+        run: ls -R 
 
       # Step 3: Restore Dependencies
       - name: Restore Dependencies
