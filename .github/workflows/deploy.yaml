@@ -51,10 +51,10 @@ jobs:
 
       # Step 7: Upload Build Artifacts for Next Job
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: compiled-app
-          path: ./midnight/Barstation/bin/Release  # Adjust path to your built files
+          path: ./midnight/Barstation/bin/Release
 
   push-docker:
     needs: build-and-test
@@ -81,7 +81,7 @@ jobs:
 
       # Step 5: Download Prebuilt Artifacts
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: compiled-app
           path: ./midnight/Barstation/bin/Release  # Ensure path matches previous upload
