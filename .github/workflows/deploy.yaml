@@ -87,6 +87,9 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
+      - name: Check QEMU Version
+        run: qemu-system-arm --version
+
       - name: Check QEMU Platforms
         run: docker buildx inspect --bootstrap
 
