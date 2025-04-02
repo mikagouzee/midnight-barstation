@@ -24,6 +24,7 @@ jobs:
           languages: csharp
 
       # Step 1: Checkout Code
+      
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -32,6 +33,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 9.x
+
+      - name: Debug Artifact Path
+        run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
 
       # Step 3: Restore Dependencies
       - name: Restore Dependencies
