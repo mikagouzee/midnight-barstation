@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compiled-app
-          path: ./midnight/Barstation/bin/Release
+          path: ../Barstation/bin/Release
 
   push-docker:
     needs: build-and-test
@@ -84,7 +84,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: compiled-app
-          path: ./midnight/Barstation/bin/Release  # Ensure path matches previous upload
+          path: ../Barstation/bin/Release  # Ensure path matches previous upload
 
       # Step 6: Build and Push Docker Image (using artifacts)
       - name: Build and Push Docker Image
