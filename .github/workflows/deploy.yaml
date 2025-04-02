@@ -40,7 +40,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.x
+          dotnet-version: 8.x
 
       - name: Debug Artifact Path
         run: ls -R 
