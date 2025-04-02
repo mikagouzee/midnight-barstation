@@ -60,10 +60,6 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout Code
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
       # Step 2: Set up Docker
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -85,6 +81,12 @@ jobs:
         with:
           name: compiled-app
           path: /home/runner/work/midnight-barstation/midnight-barstation/barstation/bin/Release/net9.0/  # Ensure path matches previous upload
+
+      - name: Debug Artifact Path
+        run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
+
+      - name: Move Project File
+        run: mv /home/runner/work/midnight-barstation/midnight-barstation/barstation/bin/Release/net9.0/Barstation.csproj /home/runner/work/midnight-barstation/midnight-barstation/Barstation/
 
       # Step 6: Build and Push Docker Image (using artifacts)
       - name: Build and Push Docker Image
