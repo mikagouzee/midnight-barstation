@@ -70,16 +70,14 @@ jobs:
       run: uname -m
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 9.x
     
     - name: Build and Push Docker Image
       run: |
         docker buildx create --use --name arm-builder
         docker buildx build --platform linux/arm/v7 -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
-
-    # # Step 3: Build and Push Docker Image
-    # - name: Build and Push Docker Image
-    #   run: |
-    #     docker buildx create --use --name arm-builder
-    #     docker buildx build --no-cache -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
-    #     docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
