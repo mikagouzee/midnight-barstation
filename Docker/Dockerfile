@@ -1,4 +1,4 @@
-FROM FROM mcr.microsoft.com/dotnet/sdk:8.0-bullseye-arm32v7 AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0-bullseye-arm32v7 AS base
 WORKDIR /app
 EXPOSE 8080
 
