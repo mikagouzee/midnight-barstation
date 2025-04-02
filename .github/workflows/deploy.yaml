@@ -70,5 +70,5 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         pwd
-        docker build -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
+        docker build --no-cache -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
         docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
