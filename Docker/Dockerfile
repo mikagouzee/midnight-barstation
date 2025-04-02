@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0-bullseye-arm32v7 AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy-arm32v7 AS base
 WORKDIR /app
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-bullseye-arm32v7 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy-arm32v7 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY Barstation/Barstation.csproj Barstation/
