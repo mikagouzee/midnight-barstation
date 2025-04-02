@@ -15,8 +15,13 @@ permissions:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
+      - name: Verify Runner Details
+        run: |
+          uname -m  # Architecture check (should return arm64)
+          lscpu      # CPU info
+
       ###temp comment out to speed up debug
       # # Step 0: Init CodeQL
       # - name: Init CodeQL
@@ -42,15 +47,15 @@ jobs:
 
       # Step 3: Restore Dependencies
       - name: Restore Dependencies
-        run: dotnet restore $GITHUB_WORKSPACE/Barstation/Barstation.csproj
+        run: dotnet restore Barstation/Barstation.csproj
 
       # Step 5: Run Unit Tests
       - name: Run Unit Tests
-        run: dotnet test $GITHUB_WORKSPACE/Barstation/Barstation.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
+        run: dotnet test Barstation/Barstation.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
 
       # Step 4: Build Solution
       - name: Build Project
-        run: dotnet build $GITHUB_WORKSPACE/Barstation/Barstation.csproj --no-restore --configuration Release
+        run: dotnet build Barstation/Barstation.csproj --no-restore --configuration Release
 
       ###TEMP COMMENTING OUT TO SPEED UP DEBUG RUN
       # # Step 6: Perform CodeQL Analysis
@@ -66,11 +71,16 @@ jobs:
 
   push-docker:
     needs: build-and-test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       # Step 1: Checkout Code
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Install Docker (if missing)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
       # Step 2: Set up Docker
       - name: Log in to Docker Hub
@@ -82,13 +92,6 @@ jobs:
       # Step 3: Check Runner Architecture
       - name: Check runner architecture
         run: uname -m
-
-      # Step 4: Set up QEMU (for ARM emulation)
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Check QEMU Platforms
-        run: docker buildx inspect --bootstrap
 
       # Step 5: Download Prebuilt Artifacts
       - name: Download Build Artifacts
@@ -103,6 +106,5 @@ jobs:
       # Step 6: Build and Push Docker Image (using artifacts)
       - name: Build and Push Docker Image
         run: |
-          docker buildx create --use --name arm-builder
-          docker buildx build --no-cache --platform linux/arm/v7 -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
+          docker build --no-cache -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
           docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest
