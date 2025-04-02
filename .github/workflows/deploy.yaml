@@ -45,8 +45,8 @@ jobs:
         run: dotnet restore $GITHUB_WORKSPACE/Barstation/Barstation.csproj
 
       # Step 4: Build Solution
-      - name: Build Solution
-        run: dotnet build midnight.sln --no-restore --configuration Release
+      - name: Build Project
+        run: dotnet build $GITHUB_WORKSPACE/Barstation/Barstation.csproj --no-restore --configuration Release
 
       # Step 5: Run Unit Tests
       - name: Run Unit Tests
