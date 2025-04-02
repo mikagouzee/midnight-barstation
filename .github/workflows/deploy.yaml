@@ -86,6 +86,10 @@ jobs:
           name: compiled-app
           path: /home/runner/work/midnight-barstation/midnight-barstation/barstation/bin/Release/net9.0/  # Ensure path matches previous upload
 
+      - name: Debug Artifact Path
+        run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
+
+
       # Step 6: Build and Push Docker Image (using artifacts)
       - name: Build and Push Docker Image
         run: |
