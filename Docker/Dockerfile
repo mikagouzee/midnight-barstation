@@ -5,7 +5,7 @@ WORKDIR /app
 
 
 # Step 2: Use a .NET SDK image to build the application
-FROM mcr.microsoft.com/dotnet/sdk:9.0-bullseye-slim-arm32v7 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy-arm32v7 AS build
 WORKDIR /src
 RUN ls -R /src
 COPY Barstation/Barastation.csproj ./
