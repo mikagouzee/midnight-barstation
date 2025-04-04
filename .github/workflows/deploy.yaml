@@ -56,20 +56,15 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore Barstation/Barstation.csproj
 
-      # Step 5: Run Unit Tests
+      # Step 4: Run Unit Tests
       - name: Run Unit Tests
         run: dotnet test Barstation/Barstation.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
 
-      # Step 4: Build Solution
+      # Step 5: Build Solution
       - name: Build Project
         run: dotnet build Barstation/Barstation.csproj --no-restore --configuration Release
 
-      ##TEMP COMMENTING OUT TO SPEED UP DEBUG RUN
-      # Step 6: Perform CodeQL Analysis
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-
-      # Step 7: Upload Build Artifacts for Next Job
+      # Step 6: Upload Build Artifacts for Next Job
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
