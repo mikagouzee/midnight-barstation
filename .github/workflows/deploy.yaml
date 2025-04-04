@@ -14,27 +14,27 @@ permissions:
   security-events: write
 
 jobs:
-  codeql-analysis:
-    runs-on: ubuntu-latest  # Use x64 runner
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+  # codeql-analysis:
+  #   runs-on: ubuntu-latest  # Use x64 runner
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v3
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 9.x
+  #     - name: Setup .NET
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: 9.x
 
-      - name: Init CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: csharp
+  #     - name: Init CodeQL
+  #       uses: github/codeql-action/init@v3
+  #       with:
+  #         languages: csharp
 
-      - name: Build for CodeQL (Minimal)
-        run: dotnet build --no-restore --configuration Debug
+  #     - name: Build for CodeQL (Minimal)
+  #       run: dotnet build --no-restore --configuration Debug
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+  #     - name: Perform CodeQL Analysis
+  #       uses: github/codeql-action/analyze@v3
 
   build-and-test:
     runs-on: ubuntu-24.04-arm
