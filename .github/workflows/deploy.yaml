@@ -73,7 +73,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: compiled-app
-          path: /home/runner/work/midnight-barstation/midnight-barstation/Barstation/bin/Release/net9.0/  # Ensure path matches previous upload
+          path: /home/runner/work/midnight-barstation/midnight-barstation/Barstation/bin/Release/net8.0/  # Ensure path matches previous upload
 
       - name: Debug Artifact Path
         run: ls -R /home/runner/work/midnight-barstation/midnight-barstation/
