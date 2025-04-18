@@ -1,10 +1,10 @@
 #FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-noble-arm32v7 AS base
-FROM mcr.microsoft.com/dotnet/runtime:9.0-noble-arm32v7 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8069
 
 
-FROM mcr.microsoft.com/dotnet/sdk:9.0.202-noble AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY Barstation/Barstation.csproj Barstation/
