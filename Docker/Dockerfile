@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:9.0-noble AS base
+FROM mcr.microsoft.com/dotnet/aspnet:9.0.4-noble-chiseled-composite-extra-arm32v7 AS base
 WORKDIR /app
 EXPOSE 8069
 
