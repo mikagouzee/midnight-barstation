@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/nightly/runtime:9.0-noble AS base
+FROM mcr.microsoft.com/dotnet/aspnet:9.0-noble AS base
 WORKDIR /app
 EXPOSE 8069
 
