@@ -14,21 +14,31 @@ permissions:
   security-events: write
 
 jobs:
+  # codeql-analysis:
+  #   runs-on: ubuntu-latest  # Use x64 runner
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v3
+
+  #     - name: Setup .NET
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: 9.x
+
+  #     - name: Init CodeQL
+  #       uses: github/codeql-action/init@v3
+  #       with:
+  #         languages: csharp
+
+  #     - name: Build for CodeQL (Minimal)
+  #       run: dotnet build --no-restore --configuration Debug
+
+  #     - name: Perform CodeQL Analysis
+  #       uses: github/codeql-action/analyze@v3
+
   build-and-test:
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: Verify Runner Details
-        run: |
-          uname -m  # Architecture check (should return arm64)
-          lscpu      # CPU info
-
-      ###temp comment out to speed up debug
-      # # Step 0: Init CodeQL
-      # - name: Init CodeQL
-      #   uses: github/codeql-action/init@v3
-      #   with:
-      #     languages: csharp
-
       # Step 1: Checkout Code      
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -42,27 +52,19 @@ jobs:
         with:
           dotnet-version: 9.x
 
-      - name: Debug Artifact Path
-        run: ls -R 
-
       # Step 3: Restore Dependencies
       - name: Restore Dependencies
         run: dotnet restore Barstation/Barstation.csproj
 
-      # Step 5: Run Unit Tests
+      # Step 4: Run Unit Tests
       - name: Run Unit Tests
         run: dotnet test Barstation/Barstation.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
 
-      # Step 4: Build Solution
+      # Step 5: Build Solution
       - name: Build Project
         run: dotnet build Barstation/Barstation.csproj --no-restore --configuration Release
 
-      ###TEMP COMMENTING OUT TO SPEED UP DEBUG RUN
-      # # Step 6: Perform CodeQL Analysis
-      # - name: Perform CodeQL Analysis
-      #   uses: github/codeql-action/analyze@v3
-
-      # Step 7: Upload Build Artifacts for Next Job
+      # Step 6: Upload Build Artifacts for Next Job
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -76,11 +78,6 @@ jobs:
       # Step 1: Checkout Code
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      # - name: Install Docker (if missing)
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y docker.io
 
       # Step 2: Set up Docker
       - name: Log in to Docker Hub
