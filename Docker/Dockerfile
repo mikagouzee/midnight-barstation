@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-noble-arm32v7 AS base
+#FROM mcr.microsoft.com/dotnet/runtime-deps:9.0-noble-arm32v7 AS base
+FROM mcr.microsoft.com/dotnet/runtime:9.0-noble-arm32v7 AS base
 WORKDIR /app
 EXPOSE 8069
 
