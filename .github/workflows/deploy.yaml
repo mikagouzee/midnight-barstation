@@ -81,5 +81,5 @@ jobs:
       # Step 6: Build and Push Docker Image (using artifacts)
       - name: Build and Push Docker Image
         run: |
-          docker build --no-cache -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
+          docker build --no-cache --platform linux/arm/v7 -t ${{secrets.DOCKER_USERNAME}}/barstation:latest -f ./Docker/Dockerfile .
           docker push ${{secrets.DOCKER_USERNAME}}/barstation:latest

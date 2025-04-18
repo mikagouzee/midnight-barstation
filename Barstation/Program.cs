@@ -11,6 +11,8 @@ builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
 
 var app = builder.Build();
 
+app.MapGet("/", () => "Barstation API is running!");
+
 app.MapPost("/addValue", (Wallet wallet, decimal amount, IWalletOperations walletOperations, ITransactionRepository transactionRepository) =>
 {
     return walletOperations.AddValue(wallet, amount);
