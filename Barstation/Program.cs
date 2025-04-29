@@ -23,13 +23,13 @@ app.MapPost("/addValue", (Wallet wallet, decimal amount, IWalletOperations walle
 	try
 	{
 		var result = walletOperations.AddValue(wallet, amount);
-        transactionCounter.Increment();
+        transactionCounter.Inc();
 
 		return result;
 	}
 	catch (global::System.Exception)
 	{
-		errorCounter.Increment();
+		errorCounter.Inc();
 		throw;
 	}
 });
@@ -39,12 +39,12 @@ app.MapPost("/subtractValue", (Wallet wallet, decimal amount, IWalletOperations 
 	try
 	{
 		var result = walletOperations.SubtractValue(wallet, amount);
-		transactionCounter.Increment();
+		transactionCounter.Inc();
 		return result;
 	}
 	catch (global::System.Exception)
 	{
-		errorCounter.Increment();
+		errorCounter.Inc();
 		throw;
 	}
 });
@@ -54,12 +54,12 @@ app.MapPost("/createWallet", (Wallet wallet, IWalletOperations walletOperations)
 {
 	try
 	{
-		transactionCounter.Increment();
+		transactionCounter.Inc();
 		return walletOperations.Create(wallet);
 	}
 	catch (global::System.Exception)
 	{
-		errorCounter.Increment();
+		errorCounter.Inc();
 		throw;
 	}
 });
@@ -68,12 +68,12 @@ app.MapPut("/blockWallet", (string username, IWalletOperations walletOperations)
 {
 	try
 	{
-		securityCounter.Increment();
+		securityCounter.Inc();
 		return walletOperations.BlockByOwner(username);
 	}
 	catch (global::System.Exception)
 	{
-		errorCounter.Increment();
+		errorCounter.Inc();
 		throw;
 	}
 });
@@ -82,12 +82,12 @@ app.MapPut("/unlockWallet", (Wallet wallet, IWalletOperations walletOperations )
 {
 	try
 	{
-		securityCounter.Increment();
+		securityCounter.Inc();
 		walletOperations.Unlock(wallet);
 	}
 	catch (global::System.Exception)
 	{
-		errorCounter.Increment();
+		errorCounter.Inc();
 		throw;
 	}
 });
