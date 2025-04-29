@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0.4-noble-chiseled-composite-extra-arm32v7 AS base
 WORKDIR /app
 EXPOSE 8069
+EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/nightly/sdk:9.0-noble AS build
 ARG BUILD_CONFIGURATION=Release
